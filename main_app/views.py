@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import CreateView
 from .models import Cat
 
 def home(request):
@@ -15,3 +16,9 @@ def cat_detail(request, cat_id):
   cat = Cat.objects.get(id=cat_id)
   print('cat: ', cat)
   return render(request, 'cats/detail.html', { 'cat': cat })
+
+# class based views 
+
+class CatCreate(CreateView):
+    model = Cat
+    fields = ['name', 'breed', 'description', 'age']
